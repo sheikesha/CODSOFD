@@ -1,0 +1,134 @@
+****************************************************USING HTML FILE*******************************************************
+<!DOCTYPE html>
+<html>
+<head>
+  <title> my Calculator</title>
+  <link rel="icon" href="calculator icon.png">
+  <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+  <div class="calculator">
+    <div class="display">
+      <p>Welcome to my Calculator</p>
+      <div id="result">0</div>
+    </div>
+    <div class="buttons">
+      <button onclick="clearResult()">AC</button>
+      <button onclick="deleteLast()">Del</button>
+      <button onclick="append('%')">%</button>
+      <button onclick="append('/')">÷</button>
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('*')">×</button>
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('-')">−</button>
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('+')">+</button>
+      <button onclick="append('0')">0</button>
+      <button onclick="append('00')">00</button>
+      <button onclick="append('.')">.</button>
+      <button onclick="calculate()">=</button>
+    </div>
+  </div>
+  <script src="calculator.js"></script>
+</body>
+</html>
+*******************************************************USING CSS FILE**********************************************************
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: white;
+  }
+  
+  .calculator {
+    width: 300px;
+    background-color: #222;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .display {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  
+  .display p {
+    margin: 0;
+    color: #555;
+  }
+  
+  #result {
+    font-size: 2em;
+    margin: 10px 0 0;
+    color: #000;
+  }
+  
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  
+  button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-size: 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  
+  button:nth-child(4n) {
+    background-color: orange;
+  }
+  
+  button:nth-child(4n):hover {
+    background-color: #ff8800;
+  }
+**********************************************USING JS FILE**************************************************
+let resultDisplay = document.getElementById("result");
+
+function append(value) {
+  if (resultDisplay.innerText === "0") {
+    resultDisplay.innerText = value;
+  } else {
+    resultDisplay.innerText += value;
+  }
+}
+
+function clearResult() {
+  resultDisplay.innerText = "0";
+}
+
+function deleteLast() {
+  if (resultDisplay.innerText.length > 1) {
+    resultDisplay.innerText = resultDisplay.innerText.slice(0, -1);
+  } else {
+    resultDisplay.innerText = "0";
+  }
+}
+
+function calculate() {
+  try {
+    resultDisplay.innerText = eval(resultDisplay.innerText.replace("×", "*").replace("÷", "/"));
+  } catch {
+    resultDisplay.innerText = "Error";
+  }
+}
